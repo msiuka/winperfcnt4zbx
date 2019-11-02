@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>counter groups for: {{ selected_instance.name }}</h2>
+    {% for cnt_group in cnt_groups %}
+        <a href="/group?id={{ cnt_group.id }}">{{ cnt_group.name }}</a>
+        <br>
+        {{ cnt_group.description }}
+        <br>
+        <br>
+    {% endfor %}
+{% endblock %}

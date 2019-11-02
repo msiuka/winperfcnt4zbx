@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Settings</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {% if not form.hide_filefields %}
+            <p>
+                {{ form.counters_file.label }}<br>
+                {{ form.counters_file(size=32) }}
+                {% for error in form.counters_file.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.ids_file.label }}<br>
+                {{ form.ids_file(size=32) }}
+                {% for error in form.ids_file.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.descr_file.label }}<br>
+                {{ form.descr_file(size=32) }}
+                {% for error in form.descr_file.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        {% else %}
+            <b>Found files in root project directory</b>
+        {% endif %}
+        <p>
+            {{ form.filter_regexp.label }}<br>
+            {{ form.filter_regexp(size=64) }}
+        </p>
+        {% if form.is_windows %}
+        <p>{{ form.current_host() }} {{ form.current_host.label }}</p>
+        {% endif %}
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

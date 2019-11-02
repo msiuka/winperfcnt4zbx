@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ selected_group.name }}</h2>
+    <a href="/instance?id={{ selected_instance.id }}"><< Back to {{ selected_instance.name }}</a>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {% if group_params.count() > 0 %}
+            <h3>Parameters:</h3>
+            {% for error in form.all_param.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <p>
+                {{ form.all_param }} {{ form.all_param.label }}
+            </p>
+            {% for field in form %}
+                {% if field.type == "BooleanField" and "parameter" in field.name %}
+                    {{ field }} {{ field.label }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <h3>counters from group: {{ cnt_group.name }}</h3>
+        {% for field in form %}
+            {% if field.type == "BooleanField" and "counter" in field.name %}
+            <p>
+                {{ field }} {{ field.label }}
+                {% if form.descriptions[field.name] != "" %}
+                    <br>
+                    <em>{{ form.descriptions[field.name] }}</em>
+                {% endif %}
+            </p>
+            {% endif %}
+        {% endfor %}
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>mssqlzbx</title>
+    </head>
+    <body>
+        <div>create zbx counters:
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('settings') }}">Settings</a>
+            <a href="{{ url_for('export') }}">Export</a>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

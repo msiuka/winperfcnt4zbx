@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if is_emptydb %}
+        <p>Go to settings to load data</p>
+    {% else %}
+    <h2>instances:</h2>
+    {% for instance in instances %}
+        <a href="/instance?id={{ instance.id }}">{{ instance.name }}</a>
+        <br>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

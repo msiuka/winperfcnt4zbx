@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+        <p>
+            <table cellspacing="2", cellpadding="5">
+                <tr>
+                    <td>
+                        {{ form.zbx_url.label }}<br>
+                        {{ form.zbx_url(size=32) }}
+                        {% for error in form.zbx_url.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ form.zbx_template_name.label }}<br>
+                        {{ form.zbx_template_name(size=32) }}
+                        {% for error in form.zbx_template_name.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form.zbx_login.label }}<br>
+                        {{ form.zbx_login(size=32) }}
+                        {% for error in form.zbx_login.errors %}
+                        <br>
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ form.zbx_password.label }}<br>
+                        {{ form.zbx_password(size=32) }}
+                        {% for error in form.zbx_password.errors %}
+                        <br>
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            {{ form.choise.label }}<br>
+            {{ form.choise }}
+        </p>
+        <hr>
+        <p>
+            {% for error in form.submit.errors %}
+            <br>
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {% if form.messages %}
+                <ul>
+                    {% for message in form.messages %}
+                        {{ message }}
+                        <br>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {% for instance in selected_data %}
+                    <h2>{{ instance }}</h2>
+                    {% for group in selected_data[instance] %}
+                        <b>{{ group }}</b>
+                        {% if selected_data[instance][group]['parameters'] %}
+                            with parameters {{ selected_data[instance][group]['parameters'] }}
+                        {% endif %}
+                        <ul>
+                            {% for cnt in selected_data[instance][group]['counters'] %}
+                                <li>{{ cnt[0] }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
