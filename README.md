@@ -10,7 +10,7 @@ Used for creating items in zabbix 4.2 to get data from performance counters of M
 ```shell
 git clone https://github.com/msiuka/winperfcnt4zbx.git
 python3 -m venv venv
-source env/bin/activate
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 * Windows
