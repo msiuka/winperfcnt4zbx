@@ -1,4 +1,4 @@
-Flask==1.1.1
+Flask==2.3.2
 Flask-WTF==0.14.2
 pyzabbix==0.7.5
 chardet==3.0.4
